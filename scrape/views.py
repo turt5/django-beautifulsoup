@@ -1,4 +1,6 @@
 from django.shortcuts import render
+
+# Create your views here.
 import requests
 from bs4 import BeautifulSoup
 from django.http import JsonResponse
@@ -22,7 +24,8 @@ def apple(request):
             'price': price
         })
 
-    return render(request, 'scrape/phones.html', {'phones': phones})
+    return JsonResponse(phones, safe=False)
+
 
 def xiaomi(request):
     base_url = "https://www.gsmarena.com.bd/xiaomi/"
@@ -45,6 +48,7 @@ def xiaomi(request):
                 'price': price
             })
 
+        # Find the next page link
         pagination = soup.find('ul', class_='pagination')
         next_page = pagination.find('a', text='»')
         if next_page:
@@ -52,4 +56,4 @@ def xiaomi(request):
         else:
             current_page_url = None
 
-    return render(request, 'scrape/phones.html', {'phones': phones})
+    return JsonResponse(phones, safe=False)
