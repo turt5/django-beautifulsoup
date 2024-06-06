@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scraped Phones</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        *{
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+        }
+        .card-img-top {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin: 0 auto;
+            {% comment %} border-radius: 50%; {% endcomment %}
+        }
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4 text-center">Scraped Phones</h1>
+        <div class="row">
+            {% for phone in phones %}
+                <div class="col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top mt-3" src="{{ phone.image }}" alt="{{ phone.name }}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ phone.name }}</h5>
+                            <p class="card-text">Price: {% if phone.price %}{{ phone.price }}{% else %}N/A{% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
